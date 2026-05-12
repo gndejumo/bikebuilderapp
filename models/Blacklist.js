@@ -9,7 +9,7 @@ const blacklistSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Data.now(),
+        default: Date.now(),
         expires: 86400 // expires in 24 hrs
     }
 })

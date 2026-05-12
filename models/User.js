@@ -5,9 +5,11 @@ const {Schema, model} = mongoose
 const userSchema = new Schema({
     firstName: String,
     lastName: String,
-    email: {type: String, uniquie: true},
+    email: {type: String, unique: true},
     password: String,
-    role: {type: String, enum: ['user', 'admin'], default: 'user'}
+    role: {type: String, enum: ['user', 'admin'], default: 'user'},
+    orders:   [{ type: Schema.Types.ObjectId, ref: 'Order' }],
+    builds:   [{ type: Schema.Types.ObjectId, ref: 'Build' }]
 })
 
 module.exports = model('User', userSchema)

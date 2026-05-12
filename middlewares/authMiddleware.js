@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET
 const Blacklist = require('../models/Blacklist')
 
 // Token Creation
@@ -12,6 +13,12 @@ const createAccessToken = (user) => {
     };
     return jwt.sign(data, JWT_SECRET_KEY,{expiresIn: "24h"});
 };
+
+
+const createRefreshToken = (user) => {
+    const data = {id: user._id}
+    return jwt.sign(data, JWT_REFRESH_SECRET,{expiresIn: '7d'})
+}
 
 const verify = async(req, res, next) => {
     try {
@@ -35,7 +42,7 @@ const verify = async(req, res, next) => {
         // syntax = jwt.verify(token, secretOrPublicKey, callback)
         const decoded = jwt.verify(token, JWT_SECRET_KEY);
         req.user = decoded
-        console.log('Decoded: ', decoded)
+        if (process.env.NODE_ENV === 'development') console.log('Decoded:', decoded)
         next();
     } catch (err) {
         next (err)
@@ -59,4 +66,4 @@ const verifyAdmin = async (req, res, next) => {
 
 
 
-module.exports = {createAccessToken, verify, verifyAdmin}
+module.exports = {createAccessToken, verify, verifyAdmin, createRefreshToken}

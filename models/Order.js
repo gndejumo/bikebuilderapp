@@ -27,4 +27,4 @@ const orderSchema = new Schema({
     }
 }, {timestamps: true})
 
-module.exports = model('Order', orderSchema) 
+module.exports = model('Order', orderSchema)
