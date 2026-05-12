@@ -11,7 +11,7 @@ const buildRoutes = require('./routes/buildRoutes')
 const partRoutes = require('./routes/partRoutes')
 const bikeRoutes = require('./routes/bikeRoutes')
 const orderRoutes = require('/routes/orderRoutes')
-
+const errorHandler = require('./middlewares/errorMiddleware')
 app.use(cors())
 app.use(express.json())
 
@@ -27,6 +27,7 @@ app.use('/api/builds', buildRoutes)
 app.use('/api/parts', partRoutes)
 app.use('/api/bike', bikeRoutes)
 app.use('/api/order', orderRoutes)
+app.use(errorHandler)
 
 
 const PORT = process.env.PORT || 5000;
