@@ -5,7 +5,7 @@ const {verify, verifyAdmin, } = require('../middlewares/authMiddleware')
 const {validateObjectId} = require('../middlewares/validateObjectId')
 
 
-router.get('/', verify, verifyAdmin, userController.getAllUsers)
+
 router.get('/me', verify, userController.getMe)
 router.get('/:id', verify,validateObjectId, userController.getProfile)
 router.patch('/:id/setAdmin', verify, verifyAdmin, userController.setAsAdmin)

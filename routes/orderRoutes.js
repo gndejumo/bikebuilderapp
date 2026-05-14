@@ -4,7 +4,7 @@ const orderController = require('../controller/orderController')
 const { verify, verifyAdmin } = require("../middlewares/authMiddleware");
 const {validateObjectId} = require('../middlewares/validateObjectId');
 
-router.get('/', verify, verifyAdmin, orderController.getOrder)
+
 router.get('/:id', verify,validateObjectId, orderController.getOrderById)
 router.get('/me', verify, orderController.getMyOrders)
 router.post('/create', verify, verifyAdmin, orderController.createOrder)

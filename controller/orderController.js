@@ -36,14 +36,6 @@ const createOrder = async (req, res, next) => {
     }
 }
 
-const getOrder = async (_req, res, next) => {
-    try {
-        const orders = await Order.find()
-        return res.status(200).json(orders)
-    } catch (err) {
-        next(err)
-    }
-}
 
 const getOrderById = async (req, res, next) => {
     try {
@@ -114,4 +106,4 @@ const cancelOrder = async (req, res, next) => {
     }
 }
 
-module.exports = {createOrder, getOrder, getOrderById, getMyOrders, updateOrderStatus, cancelOrder}
+module.exports = {createOrder, getOrderById, getMyOrders, updateOrderStatus, cancelOrder}

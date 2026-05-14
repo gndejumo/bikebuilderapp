@@ -8,12 +8,11 @@ require('dotenv').config();
 // Modules routes importation
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
-// const adminRoutes = require('./routes/adminRoutes')
-// const buildRoutes = require('./routes/buildRoutes')
-// const partRoutes = require('./routes/partRoutes')
-// const bikeRoutes = require('./routes/bikeRoutes')
-// const orderRoutes = require('./routes/orderRoutes')
-const errorHandler = require('./middlewares/errorMiddleware')
+const adminRoutes = require('./routes/adminRoutes')
+const buildRoutes = require('./routes/buildRoutes')
+const partRoutes = require('./routes/partRoutes')
+const bikeRoutes = require('./routes/bikeRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 
 app.use(cors())
 app.use(express.json())
@@ -25,11 +24,11 @@ app.use(rateLimiter);
 // Register API end point
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
-// app.use('/api/admin', adminRoutes)
-// app.use('/api/builds', buildRoutes)
-// app.use('/api/parts', partRoutes)
-// app.use('/api/bike', bikeRoutes)
-// app.use('/api/order', orderRoutes)
+app.use('/api/admin', adminRoutes)
+app.use('/api/builds', buildRoutes)
+app.use('/api/parts', partRoutes)
+app.use('/api/bike', bikeRoutes)
+app.use('/api/order', orderRoutes)
 app.use(errorHandler)
 
 

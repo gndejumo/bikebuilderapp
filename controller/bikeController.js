@@ -3,7 +3,7 @@ const Bike = require ('../models/Bike')
 const getAllBikes = async (_req, res, next) => {
     try {
         const bikes = await Bike.find()
-        if (!bikes.length === 0 ) {
+        if (!bikes.length) {
             return res.status(404).json({
                 message: "No bikes yet"
             })

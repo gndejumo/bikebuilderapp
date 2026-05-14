@@ -1,17 +1,6 @@
 const User = require('../models/User')
 
-const getAllUsers = async(_req, res, next) => {
-    try {
-        const users = await User.find()
-        const safeUser = users.map(user => {
-            const {password: _password, ...safeUser} = user.toObject()
-            return safeUser
-        })
-        return res.status(200).json(safeUser)
-    } catch (err) {
-        next(err)
-    }
-}
+
 
 const getProfile = async (req, res, next) => {
     try {
@@ -79,4 +68,4 @@ const setAsAdmin = async (req, res, next) => {
 
 
 
-module.exports = {getProfile, getMe, setAsAdmin, getAllUsers}
+module.exports = {getProfile, getMe, setAsAdmin}
