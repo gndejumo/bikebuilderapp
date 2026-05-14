@@ -1,4 +1,4 @@
 
 
 
-module.exports = {getAllBuilds}
+module.exports = {getAllBuilds, deleteUser}
