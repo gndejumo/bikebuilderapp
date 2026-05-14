@@ -11,6 +11,3 @@ router.get('/:id', verify,validateObjectId, userController.getProfile)
 router.patch('/:id/setAdmin', verify, verifyAdmin, userController.setAsAdmin)
 
 module.exports = router
-
-
-// {getProfile, getMe, setAsAdmin, getAllUsers}

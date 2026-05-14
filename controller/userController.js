@@ -45,7 +45,7 @@ const getMe = async(req, res, next) => {
                 message: "User not found"
             })
         }
-        return res.status(200).json({
+        return res.status(200).json({ 
             message: "Successfully retrieved your profile",
             user
         }) 
