@@ -1,5 +1,6 @@
 const Order = require('../models/Order')
 const Build = require('../models/Build')
+const User = require('../models/User')
 
 const createOrder = async (req, res, next) => {
     try {
@@ -27,6 +28,9 @@ const createOrder = async (req, res, next) => {
             shipping
         })
         await newOrder.save()
+        await User.findByIdAndUpdate(req.user.id, 
+            {$push: {orders: newOrder._id}})
+        console.log('New Order: ', newOrder._id.toString())
         return res.status(201).json({
             message: "Successfully created order",
             order: newOrder
@@ -102,7 +106,7 @@ const cancelOrder = async (req, res, next) => {
             {status: 'cancelled'}, 
             {returnDocument: 'after' })
         res.status(200).json({
-            message: "Successfully deleted order",
+            message: "Successfully cancelled order",
             order: cancelOrder
         })
     } catch (err) {

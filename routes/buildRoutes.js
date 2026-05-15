@@ -6,8 +6,8 @@ const {validateObjectId} = require('../middlewares/validateObjectId')
 
 router.get('/', verify, buildController.getMyBuilds )
 router.get('/:id', verify,validateObjectId, buildController.getBuildById)
-router.patch('/:id/update', verify,validateObjectId, buildController.updateBuild)
-router.post('/create', verify,buildController.createBuild)
-router.delete('/:id/delete',verify, validateObjectId, buildController.deleteBuild)
+router.patch('/:id', verify,validateObjectId, buildController.updateBuild)
+router.post('/', verify,buildController.createBuild)
+router.delete('/:id/',verify, validateObjectId, buildController.deleteBuild)
 
 module.exports = router

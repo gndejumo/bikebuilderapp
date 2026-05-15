@@ -27,8 +27,8 @@ app.use('/api/users', userRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/builds', buildRoutes)
 app.use('/api/parts', partRoutes)
-app.use('/api/bike', bikeRoutes)
-app.use('/api/order', orderRoutes)
+app.use('/api/bikes', bikeRoutes)
+app.use('/api/orders', orderRoutes)
 app.use(errorHandler)
 
 

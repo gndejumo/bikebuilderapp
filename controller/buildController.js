@@ -1,5 +1,5 @@
 const Build = require('../models/Build')
-
+const User = require('../models/User')
 const getMyBuilds = async (req, res, next) => {
     try {
         const builds = await Build.find({userId: req.user.id})
@@ -39,9 +39,13 @@ const updateBuild = async (req, res, next) => {
             })
         }
         const {name, selectedParts, status } = req.body
+        const updates = {} 
+        if (name !== undefined) updates.name = name
+        if (selectedParts !== undefined) updates.selectedParts = selectedParts
+        if (status !== undefined) updates.status = status
         const updatedBuild = await Build.findByIdAndUpdate(build_id, 
-            {name, selectedParts,status}, 
-            { returnDocument: 'after' })
+            {$set: updates}, 
+            {returnDocument: 'after'})
         return res.status(200).json({
             message: "Successfully updated your bike build",
             build: updatedBuild
@@ -56,6 +60,9 @@ const createBuild = async (req, res, next) => {
         const {name, selectedParts, status} = req.body
         const newBuild = new Build({userId: req.user.id, name, selectedParts, status})
         await newBuild.save()
+        await User.findByIdAndUpdate(req.user.id,
+            {$push: {builds: newBuild._id}}
+        )
         return res.status(201).json({
             message: "Build has been successfully created",
             build: newBuild
@@ -77,7 +84,7 @@ const deleteBuild = async (req, res, next) => {
         }
         await Build.findByIdAndDelete(build_id)
         return res.status(200).json({
-            message: "Successfully delete build"
+            message: "Successfully deleted build"
         })
     } catch (err) {
         next(err)
