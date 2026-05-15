@@ -77,7 +77,9 @@ const updateOrderStatus = async (req, res, next) => {
             })
         }
         const {status} = req.body
-        const updatedStatus = await Order.findByIdAndUpdate(order_id, {status}, {new: true})
+        const updatedStatus = await Order.findByIdAndUpdate(order_id, 
+            {status}, 
+            {returnDocument: 'after'})
         return res.status(200).json({
             message: "Successfully updated Order status",
             status: updatedStatus
@@ -96,7 +98,9 @@ const cancelOrder = async (req, res, next) => {
                 message: "Order not found"
             })
         }
-        const cancelOrder = await Order.findByIdAndUpdate(order_id, {status: 'cancelled'}, {new: true})
+        const cancelOrder = await Order.findByIdAndUpdate(order_id, 
+            {status: 'cancelled'}, 
+            {returnDocument: 'after' })
         res.status(200).json({
             message: "Successfully deleted order",
             order: cancelOrder

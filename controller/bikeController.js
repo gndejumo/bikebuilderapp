@@ -77,7 +77,8 @@ const updateBike = async (req, res, next) => {
         if (isActive !== undefined) updates.isActive = isActive
         
         const updatedBike = await Bike.findByIdAndUpdate(bike_id, 
-            {$set: updates}, {new: true})
+            {$set: updates}, 
+            {returnDocument: 'after'})
         if (!updatedBike) {
             return res.status(404).json({
                 message: "Bike not found"

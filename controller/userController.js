@@ -49,7 +49,7 @@ const setAsAdmin = async (req, res, next) => {
         const userId = req.params.id
         const updatedUser = await User.findByIdAndUpdate(userId,
             {role: 'admin'},
-            {new: true}
+            {returnDocument: 'after' }
         ).select('-password')
         if (!updatedUser) {
             return res.status(404).json({

@@ -1,21 +1,21 @@
 const Part = require('../models/Part')
 
 
-const getPart = async (req, res, next) => {
-    try {
-        const {name, category, brand} = req.query
-        const filter = {}
-        if (name) filter.name = { $regex: name, $options: 'i' }
-        if (category) filter.category = category
-        if (brand) filter.brand = brand
-        const parts = await Part.find(filter)
-        return res.status(200).json({
-            parts
-        })
-    } catch (err) {
-        next(err)
+    const getPart = async (req, res, next) => {
+        try {
+            const {name, category, brand} = req.query
+            const filter = {}
+            if (name) filter.name = { $regex: name, $options: 'i' }
+            if (category) filter.category = { $regex: category, $options: 'i' }
+            if (brand) filter.brand = { $regex: brand, $options: 'i' }
+            const parts = await Part.find(filter)
+            return res.status(200).json({
+                parts
+            })
+        } catch (err) {
+            next(err)
+        }
     }
-}
 
 const addPart = async (req, res, next) => {
     try {
@@ -58,7 +58,7 @@ const getPartById = async (req, res, next) => {
 
 const deletePart = async (req, res, next) => {
     try {
-        const part_id = req.params
+        const part_id = req.params.id
         const part = await Part.findById(part_id)
         if (!part) {
             return res.status(404).json({
@@ -84,11 +84,26 @@ const updatePart = async (req, res, next) => {
             })
         }
         const { name, category, brand, price, colors, images, specs, stock, status } = req.body
-        const updatedPart = await Part.findByIdAndUpdate(part_id, {name, category, brand, price, colors, images, specs, stock, status}, {new: true} )
+        const updates = {}
+        if (name !== undefined) updates.name = name
+        if (category !== undefined) updates.category = category
+        if (brand !== undefined) updates.brand = brand
+        if (price !== undefined) updates.price = price
+        if (colors !== undefined) updates.colors = colors
+        if (images !== undefined) updates.images = images
+        if (specs !== undefined) updates.specs = specs
+        if (stock !== undefined) updates.stock = stock
+        if (status !== undefined) updates.status = status
+
+        const updatedPart = await Part.findByIdAndUpdate(part_id, 
+            {$set: updates}, 
+            {returnDocument: 'after'})
+
         return res.status(200).json({
-                message: "Part updated successfully",
-                part: updatedPart
-            })
+            message: "Successfully updated part",
+            parts: updatedPart
+        })
+
     } catch (err) {
         next(err)
     }

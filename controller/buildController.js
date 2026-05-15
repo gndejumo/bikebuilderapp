@@ -41,7 +41,7 @@ const updateBuild = async (req, res, next) => {
         const {name, selectedParts, status } = req.body
         const updatedBuild = await Build.findByIdAndUpdate(build_id, 
             {name, selectedParts,status}, 
-            {new: true})
+            { returnDocument: 'after' })
         return res.status(200).json({
             message: "Successfully updated your bike build",
             build: updatedBuild

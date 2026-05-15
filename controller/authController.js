@@ -101,7 +101,7 @@
             const token = req.headers.authorization.split(' ')[1]
             await Blacklist.create({token})
             return res.status(200).json({
-                message: "User has been logout successfully"
+                message: "User has been logged out"
             })
         } catch (err) {
             next(err)
