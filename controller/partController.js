@@ -101,7 +101,7 @@ const updatePart = async (req, res, next) => {
                 thumbnail: req.file.path,
                 preview:   req.file.path
             }
-        } 
+        }
         if (specs !== undefined) updates.specs = specs
         if (stock !== undefined) updates.stock = stock
         if (status !== undefined) updates.status = status
