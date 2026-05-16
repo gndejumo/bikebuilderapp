@@ -19,7 +19,12 @@ const Part = require('../models/Part')
 
 const addPart = async (req, res, next) => {
     try {
-        const {name, category, brand, price, colors, images, specs, stock, status} = req.body
+        const {name, category, brand, price, colors, specs, stock, status} = req.body
+        // check if image was uploaded
+        const images = {
+            thumbnail: req.file ? req.file.path : null,
+            preview:   req.file ? req.file.path : null
+        }
         const newPart = new Part({
             name,
             category,
@@ -91,6 +96,12 @@ const updatePart = async (req, res, next) => {
         if (price !== undefined) updates.price = price
         if (colors !== undefined) updates.colors = colors
         if (images !== undefined) updates.images = images
+        if (req.file) {
+            updates.images = {
+                thumbnail: req.file.path,
+                preview:   req.file.path
+            }
+        } 
         if (specs !== undefined) updates.specs = specs
         if (stock !== undefined) updates.stock = stock
         if (status !== undefined) updates.status = status
@@ -98,7 +109,6 @@ const updatePart = async (req, res, next) => {
         const updatedPart = await Part.findByIdAndUpdate(part_id, 
             {$set: updates}, 
             {returnDocument: 'after'})
-
         return res.status(200).json({
             message: "Successfully updated part",
             parts: updatedPart

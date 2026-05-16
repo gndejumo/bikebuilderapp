@@ -31,7 +31,11 @@ const getBikeById = async (req, res, next) => {
 
 const addBike = async (req, res, next) => {
     try {
-        const {name, description, defaultParts, basePrice, images} = req.body
+        const {name, description, defaultParts, basePrice} = req.body
+                const images = {
+            thumbnail: req.file ? req.file.path : null,
+            preview: req.file ? req.file.path : null
+        }
         const newBike = new Bike({
             name, description, defaultParts, basePrice, images
         })
@@ -74,8 +78,16 @@ const updateBike = async (req, res, next) => {
         if (defaultParts !== undefined) updates.defaultParts = defaultParts
         if (basePrice !== undefined) updates.basePrice = basePrice
         if (images !== undefined) updates.images = images
+        if (req.images) {
+            updates.images = {
+                thumbnail: req.file.path,
+                preview: req.file.path
+            }
+        }
+
+
+
         if (isActive !== undefined) updates.isActive = isActive
-        
         const updatedBike = await Bike.findByIdAndUpdate(bike_id, 
             {$set: updates}, 
             {returnDocument: 'after'})

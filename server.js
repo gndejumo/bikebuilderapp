@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 const rateLimiter = require('./middlewares/rateLimiter')
 const errorHandler = require('./middlewares/errorMiddleware')
 require('dotenv').config();
+
+
 // Modules routes importation
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
@@ -13,10 +15,9 @@ const buildRoutes = require('./routes/buildRoutes')
 const partRoutes = require('./routes/partRoutes')
 const bikeRoutes = require('./routes/bikeRoutes')
 const orderRoutes = require('./routes/orderRoutes')
-
+const uploadRoutes = require('./routes/uploadRoutes')
 app.use(cors())
 app.use(express.json())
-
 app.get('/', (req, res) => {
     res.send('API is running')
 })
@@ -29,6 +30,7 @@ app.use('/api/builds', buildRoutes)
 app.use('/api/parts', partRoutes)
 app.use('/api/bikes', bikeRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/upload', uploadRoutes)
 app.use(errorHandler)
 
 

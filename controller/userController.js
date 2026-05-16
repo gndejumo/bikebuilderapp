@@ -66,6 +66,30 @@ const setAsAdmin = async (req, res, next) => {
     }
 }
 
+const updateAvatar = async (req, res, next) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No image uploaded' })
+        }
+        const user = await User.findByIdAndUpdate(
+            req.user.id,
+            { avatar: req.file.path },
+            { returnDocument: 'after' }
+        ).select('-password')
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+
+        return res.status(200).json({
+            message: 'Avatar updated successfully',
+            user
+        })
+    } catch (err) {
+        next(err)
+    }
+}
 
 
-module.exports = {getProfile, getMe, setAsAdmin}
+
+module.exports = {getProfile, getMe, setAsAdmin, updateAvatar}

@@ -8,6 +8,7 @@ const userSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     role: {type: String, enum: ['user', 'admin'], default: 'user'},
+    avatar:    { type: String, default: null },
     orders:   [{ type: Schema.Types.ObjectId, ref: 'Order' }],
     builds:   [{ type: Schema.Types.ObjectId, ref: 'Build' }]
 })
