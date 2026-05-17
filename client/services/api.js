@@ -15,7 +15,6 @@ api.interceptors.request.use(config => {
 })
 
 // handle expired token globally
-
 api.interceptors.response.use(response => response, (error => {
     if (error.response?.status === 401){
         localStorage.removeItem('token')
