@@ -16,8 +16,11 @@
     "vite": "^8.0.12"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "axios": "^1.16.1",
+    "react-hook-form": "^7.76.0",
     "react-router-dom": "^7.15.1",
+    "zod": "^4.4.3",
     "zustand": "^5.0.13"
   }
 }

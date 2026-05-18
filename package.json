@@ -10,7 +10,10 @@
     "start": "node server.js"
   },
   "devDependencies": {
+    "autoprefixer": "^10.5.0",
     "nodemon": "^3.1.14",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.3.0",
     "typescript": "~6.0.2",
     "vite": "^8.0.10"
   },

@@ -1,0 +1,110 @@
+/* Parts.css */
+.parts-page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+/* ── Sidebar ── */
+.parts-sidebar {
+    width: 260px;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-right: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.parts-sidebar h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.filter-group select,
+.filter-group input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+    box-sizing: border-box;
+    background: #f9fafb;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    border-color: #1a1a1a;
+    background: #ffffff;
+}
+
+.filter-reset {
+    width: 100%;
+    padding: 0.5rem;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.filter-reset:hover {
+    background: #333333;
+}
+
+/* ── Main Content ── */
+.parts-main {
+    flex: 1;
+    padding: 2rem;
+}
+
+.parts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.parts-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.parts-count {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* ── Search Bar ── */
+.search-bar {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+    background: #ffffff;
